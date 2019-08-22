@@ -88,6 +88,39 @@ body {
 	font-weight:500;
 	font-size:14px;
 }
+.multiselect {
+  width: 200px;
+}
+
+.selectBox {
+  position: relative;
+}
+
+.selectBox select {
+  width: 100%;
+  
+}
+
+.overSelect {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+}
+
+#wlc,#aps {
+  display: none;
+  border: 1px #dadada solid;
+}
+
+#wlc label,#aps label {
+  display: block;
+}
+
+#wlc label:hover {
+  
+}
 
 	</style>
 </head>
@@ -110,24 +143,63 @@ body {
                     
 					<img class=''  src="img/pundit.png" align="center" style="width:90px;" /><br>
 					
-					<div style="display:flex;margin-top:60px;">
+					<div style="display:flex;margin-top:60px;" onclick="hideDD()">
 						<div class = "pdesc" style="flex: 0 0 10em;" >Select WLC</div>
-						<select class="form-control" name='class'  id='wlc' style="width:50%" >
+						<!--<select class="form-control" name='class'  id='wlc' style="width:50%" multiple="multiple" >
 							<option id='cash' value='cash'>WLC2504</option>
 							<option id='cheque' value='cheque'>WLC5508</option>
 							<option id='online' value='online'>WLC8501</option>
-						</select>
+						</select>-->
+						<div class="multiselect">
+						<div class="selectBox" onclick="showCheckboxes('wlc')">
+							<select class="form-control">
+								<option id="option_wlc">Select WLC</option>
+							</select>
+							<div class="overSelect"></div>
+						</div>
+						<div id="wlc">
+							<label for="one" style="font-weight: 400;margin-left:-30px;padding-top:10px;">
+							<input type="checkbox" id="AIR-CT2504" style="font-weight: 400;" onclick='selWLC(this)'  /> AIR-CT2504</label>
+							<label for="two" style="font-weight: 400;margin-left:-30px;">
+							<input type="checkbox" id="AIR-CT5508" style="font-weight: 400;" onclick='selWLC(this)'  /> AIR-CT5508</label>
+							<label for="three" style="font-weight: 400;margin-left:-30px;">
+							<input type="checkbox" id="AIR-CT8510" style="font-weight: 400;" onclick='selWLC(this)' /> AIR-CT8510</label>
+						</div>
+						</div>
 					</div> 
 					<div style="display:flex;margin-top:60px;">
 						<div class = "pdesc" style="flex: 0 0 10em;">Select AP</div>
-						<select class="form-control" name='class'  id='wlc' style="width:50%" >
+						<!--<select class="form-control" name='class'  id='wlc' style="width:50%" >
 							<option id='cash' value='cash'>AP1040</option>
 							<option id='cheque' value='cheque'>AP1140</option>
 							<option id='online' value='online'>AP1260</option>
 							<option id='online' value='online'>AP1152</option>
 							<option id='online' value='online'>AP700</option>
 							<option id='online' value='online'>AP600</option>
-						</select>
+						</select>-->
+						<div class="multiselect">
+						<div class="selectBox" onclick="showCheckboxes('aps')">
+							<select class="form-control">
+								<option id="option_aps">Select AP</option>
+							</select>
+							<div class="overSelect"></div>
+						</div>
+						<div id="aps">
+							<label for="one" style="font-weight: 400;margin-left:-30px;padding-top:10px;">
+							<input type="checkbox" id="AP1040" style="font-weight: 400;"  onclick='selAP(this)' /> AP1040</label>
+							<label for="two" style="font-weight: 400;margin-left:-30px;">
+							<input type="checkbox" id="AP1140" style="font-weight: 400;" onclick='selAP(this)'  /> AP1140</label>
+							<label for="three" style="font-weight: 400;margin-left:-30px;">
+							<input type="checkbox" id="AP1260" style="font-weight: 400;" onclick='selAP(this)' /> AP1260</label>
+							<label for="three" style="font-weight: 400;margin-left:-30px;">
+							<input type="checkbox" id="AP1152" style="font-weight: 400;" onclick='selAP(this)' /> AP1152</label>
+							<label for="three" style="font-weight: 400;margin-left:-30px;">
+							<input type="checkbox" id="AP700" style="font-weight: 400;" onclick='selAP(this)' /> AP700</label>
+							<label for="three" style="font-weight: 400;margin-left:-30px;">
+							<input type="checkbox" id="AP600" style="font-weight: 400;" onclick='selAP(this)' /> AP600</label>
+							
+						</div>
+						</div>
 					</div> 
 					<button class="btn btn-info" type="button"  onclick="window.location.href='recSW.html'">Find S/W</button>
             </div>
@@ -145,8 +217,39 @@ body {
 
 <script async defer type="text/javascript">
 app.initialize();
+var expanded = false;
 
+function showCheckboxes(cb) {
+  
+  var checkboxes = document.getElementById(cb);
+  if (!expanded) {
+    checkboxes.style.display = "block";
+    expanded = true;
+  } else {
+    checkboxes.style.display = "none";
+    expanded = false;
+  }
+  return false;
+}
 
+function hideDD(){
+	 
+	return false;
+}
+function selAP(t){
+	var a = document.getElementById("option_aps");
+	//if(a.length <15){
+	a.innerHTML = a.innerHTML.replace("Select AP","");
+	a.innerHTML += t.id + ", ";
+	//}
+}
+function selWLC(t){
+	var a = document.getElementById("option_wlc");
+	//if(a.length <15){
+	a.innerHTML = a.innerHTML.replace("Select WLC","");
+	a.innerHTML += t.id + ", ";
+	//}
+}
 </script>
 
 </html>
