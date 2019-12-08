@@ -87,22 +87,29 @@ body {
 	font-weight:500;
 	font-size:14px;
 }
-
+.base {
+	
+	display:flex;
+	justify-content: center;
+	text-align:center;
+	padding-top:70px;
+	
+}
 	</style>
 </head>
 
 <body>
 <form>
 
-    <div class="content" style="background-color:white;height: 1100px;">
+    <div class="content" style="background-color:white;">
         <div class="container-fluid">
-		<div class="card">
-			<div class="panel-body" style="text-align:center;padding-top:70px;">
+		<div class="card base" style="text-align:center;">
+			<div class="panel-body " style="width:400px;">
                     
 					<img class=''  src="img/pundit.png" align="center" style="width:145px;" /><br>
 					<p class="pname">Wireless Pundit</p>
 					<div class = "pdesc">Recommendation for S/W release and HW Refresh cycle</div> 
-					<button class="btn btn-info" type="button"  onclick="window.location.href='showSW.html'">Find S/W</button>
+					<button class="btn btn-info" type="button"  onclick="findSW();">Find S/W</button>
             </div>
 		</div>		
 		</div>	
@@ -112,13 +119,36 @@ body {
 	</div>
 </form>	
 </body>
-<script type="text/javascript" src="cordova.js"></script>
-<script type="text/javascript" src="js/index.js"></script>
-<script type="text/javascript" src="js/msg.js"></script>
+
+<script type="text/javascript" src="js/dataTbl.js"></script>
 
 <script async defer type="text/javascript">
-app.initialize();
+//app.initialize();
 
+getData("code=1",0,"getData.php",getAPList,eRR);
+getData("code=2",0,"getData.php",getWLCList,eRR);
+
+function findSW(){
+	localStorage.wlc="";
+	localStorage.ap = "";
+	window.location.href='showSW.html';
+}
+function getAPList(data){
+	var d = JSON.parse(data);
+	var ap = [];
+	for(var i=0; i<d.length; i++){
+		ap.push(d[i]["apid"]);
+	}
+	localStorage.apList = JSON.stringify(ap);
+}
+function getWLCList(data){
+	var d = JSON.parse(data);
+	var wlc = [];
+	for(var i=0; i<d.length; i++){
+		wlc.push(d[i]["wlcid"]);
+	}
+	localStorage.wlcList = JSON.stringify(wlc);
+}
 
 </script>
 

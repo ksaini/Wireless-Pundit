@@ -261,16 +261,16 @@ button:focus {
                     
 					<img class=''  src="img/pundit.png" align="center" style="width:90px;" /><br>
 					<div style="margin-bottom:50px;padding:5px;">
-						<div class = "pdesc " style="" >Select WLC</div>
+						<div class = "pdesc " style="" >Select AP</div>
 						<div class="autocomplete" >
-						<input id="selwlc" class="plchldr" price=0 type="text" name="selwlc" placeholder="Type here to Choose WLC">
-						<button type="button" class="btn btn-sm" onclick="addwlc()">Select</button>
+						<input id="selap" class="plchldr" price=0 type="text" name="selap" placeholder="Type here to Choose AP">
+						<button type="button" class="btn btn-sm" onclick="addap()">ADD</button>
 					</div>	<br>
 						<ul class="chat" id="wlc"></ul>
 					</div>
 					
 					
-					<button class="btn btn-info" type="button"  onclick="gotoAP();">Find S/W</button>
+					<button id="btn-send" class="btn btn-info" type="button"  onclick="localStorage.ap = JSON.stringify(s_ap);;window.location.href = 'recSW.html';	">Find S/W</button>
             </div>
 		</div>		
 		</div>	
@@ -281,48 +281,54 @@ button:focus {
 </form>	
 </body>
 
-<script src="./js/dataTbl.js"></script>
-<script src="./js/autocomplete.js"></script>
+ <script src="./js/dataTbl.js"></script>
 <script async defer type="text/javascript">
 
 var expanded = false;
-var wlc = JSON.parse(localStorage.wlcList);
-var wlc_tmp = [];
-//["AIR-CT2504","AIR-CT5508","AIR-CT8510"];
+var wlc = JSON.parse(localStorage.apList);
+//["AP1240","AP3321","AP4567","AP3451","AP3251","AP3452","AP3453","AP8001","AP7001","AP6001","AP5001","AP4100","AP3100","AP3200","AP4300"];
+var ap_tmp = [];
 showWLC();
-document.getElementById("selwlc").focus();
-autocomplete(document.getElementById("selwlc"), wlc,0);
+autocomplete(document.getElementById("selap"), wlc,0);
 
 function showWLC(){
 	var msg = "";
-	for (var i=0; i < wlc_tmp.length; i++) {
-		
-			msg += "<li id='m_"+wlc_tmp[i]+"' class='left clearfix'><span class='chat-img pull-left'>";
-			msg += "<div class='circleBase type1' style='background:#"+getRandomColor(i)+"'>WL</div>";
+	for (var i=0; i < ap_tmp.length; i++) {
+		msg += "<span class='chat-img pull-right'>";
+		msg += "<button style='height:50px;background-color:#5bc0de;' type='button' class='btn btn-warning' name='markabs' onclick='remAP(&quot;"+ap_tmp[i]+"&quot;);'>Remove</button></span>";
+			
+			msg += "<li id='m_"+ap_tmp[i]+"' class='left clearfix'><span class='chat-img pull-left'>";
+			msg += "<div class='circleBase type1' style='background:#5bc0de'>AP</div>";
 			msg += "</span><div class='chat-body clearfix'><div class='header'>";
-			msg += wlc_tmp[i] +"</div>";
+			msg += ap_tmp[i] +"</div>";
 			
 			msg += "</div></li>";    
 	}
 	
 	$("#wlc").html(msg);
 }
-
-function gotoAP(){
-
-	localStorage.wlc = JSON.stringify(s_wlc);
-	window.location.href='showAP.html';
-}
-
-function addwlc(){
-   //wlc_tmp.push(document.getElementById("selwlc").value);
-   wlc_tmp = [document.getElementById("selwlc").value];
-   s_wlc = [document.getElementById("selwlc").value];
-   document.getElementById("selwlc").focus();
-   document.getElementById("selwlc").value = "";
+function addap(){
+   ap_tmp.push(document.getElementById("selap").value);
+   s_ap.push(document.getElementById("selap").value);
+   document.getElementById("selap").value = "";
    showWLC();
 }
+function remAP(n){
+    s_ap = removeA(s_ap, n);
+    ap_tmp = removeA(ap_tmp, n);
+    showWLC();
+}
 
+function removeA(arr) {
+    var what, a = arguments, L = a.length, ax;
+    while (L > 1 && arr.length) {
+        what = a[--L];
+        while ((ax= arr.indexOf(what)) !== -1) {
+            arr.splice(ax, 1);
+        }
+    }
+    return arr;
+}
 </script>
 
 </html>

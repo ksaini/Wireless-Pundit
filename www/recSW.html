@@ -78,7 +78,7 @@ body {
 }
 .alert {
 	font-family: 'open_sans','Open Sans',sans-serif;
-	text-align: center;
+	text-align: left;
     font-size: 14px;
     font-weight: 400;
 	color: red;
@@ -95,6 +95,14 @@ body {
 .vvl {
 	font-size: 10px;
 	letter-spacing: 1px;
+}
+.base {
+	
+	display:flex;
+	justify-content: center;
+	text-align:center;
+	padding-top:70px;
+	
 }
 
 	</style>
@@ -113,18 +121,18 @@ body {
 
     <div class="content" style="background-color:white;height: 1100px;">
         <div class="container-fluid">
-		<div class="card">
-			<div class="panel-body" style="text-align:center;padding-top:65px;">
+		<div class="card base">
+			<div class="panel-body" style="text-align:center;padding-top:5px;width:500px;">
                     
 					<img class=''  src="img/pundit.png" align="center" style="width:90px;" /><br>
 					
-					<div class="btn btn-info">Recommended S/W</div>
+					<div class="btn btn-info">Recommended S/W <span id="selwlc"></span></div>
 					<div class = "pname" >
 						<div class="content ">
                             <div class="content table-responsive table-full-width">
                                 <table class="table table-hover table-striped sortable" key="" id="pid2">
 									<tbody id='pbody2'>
-										<tr><td>AireOS Version</td><td class="vvl">NA</td></tr>
+										<tr><td>AireOS Version</td><td class="vvl" id="aos">NA</td></tr>
 										<tr><td>IOS XE Version</td><td class="vvl">16.x</td></tr>
 										<tr><td><img src="img/prime.jpg" style="width:20px;" /> Prime</td><td class="vvl">Coming Soon</td></tr>
 										<tr><td><img src="img/dnac.png" style="width:20px;" /> DNAC</td><td class="vvl">Coming Soon</td></tr>
@@ -135,8 +143,8 @@ body {
                         </div>
 					</div> 
 					<div class="btn btn-info" style="margin-top:0px;" >Alert</div>
-					<div class='alert'>
-						AP1600 is EOL new replacement product is C9115, Please get in touch with BU PM  to discuss opportunity.
+					<div id = "alert" class='alert'>
+						
 					</div>
 					
             </div>
@@ -148,13 +156,12 @@ body {
 	</div>
 </form>	
 </body>
-<script type="text/javascript" src="cordova.js"></script>
-<script type="text/javascript" src="js/index.js"></script>
-<script type="text/javascript" src="js/msg.js"></script>
+
+<script type="text/javascript" src="js/dataTbl.js"></script>
 
 <script async defer type="text/javascript">
-app.initialize();
-
+//app.initialize();
+calcRec();
 
 </script>
 
