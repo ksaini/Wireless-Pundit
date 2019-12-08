@@ -1,6 +1,6 @@
 var s_wlc = [];
 var s_ap = [];
-var base_url = "http://greyboxerp.com/wpundit";
+var base_url = "https://greyboxerp.in/wpundit";
 
 function getData(q,type,f,dSuccess,dError) {
 	 
@@ -103,7 +103,7 @@ function recSuccess(data){
 	    for(var key1 in d3){
 	        var v = String(d3[key1]).split("|")[0];
 	        if(v != key)
-	           txt += "<span style='color:red'>" + key + "</span>";
+	           txt += "<span style='color:red'>" + key + "<br></span>";
 	    }
 	}
 	
